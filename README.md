@@ -1,2 +1,2 @@
 # lifeExpectancyMapping
-Working with technology to map county level health expectancy and census data.
+Working with technology to map county level health expectancy and census data. The work was inspired by a paper [Inequalities in Life Expectancy Among US Counties, 1980 to 2014](https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2626194) where my life expectancy data comes from. For a quick summary of the paper please visit [this blog](https://directorsblog.nih.gov/2017/05/16/widening-gap-in-u-s-life-expectancy/#more-8345)
