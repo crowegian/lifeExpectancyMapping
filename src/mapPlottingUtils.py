@@ -1,5 +1,7 @@
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
+import pandas as pd
+# from src.countyDataExtractionUtils import findCountyLE
 
 # Code heavily copied and influenced by
 # http://shallowsky.com/blog/programming/plotting-election-data-basemap.html
@@ -58,6 +60,7 @@ def draw_us_map():
         stateFPs (list(str)): State FP IDs can be used to index into stateFPs in order
             to get the corresponding state name.
     TODO:
+        1) Make sure map county information andLE information years match
     """
     # Set the lower left and upper right limits of the bounding box:
     lllon = -119
@@ -89,7 +92,7 @@ def draw_us_map():
 
 
 
-def colorMap(BM, stateFPs):
+def colorMap(BM, stateFPs, countyFpToLeDict):
     """
     Description: Colors counties on a map. Iterates through all counties and changes their color.
     Input:
@@ -103,6 +106,11 @@ def colorMap(BM, stateFPs):
         2) handle alaska and Hawaii data. You need to draw counties for them and fix an issue
             where alaska being fucksy when you draw it.
     """
+
+
+
+
+
     ax = plt.gca() 
     for i, county in enumerate(BM.counties_info):
         countyname = county["NAME"]
@@ -128,16 +136,21 @@ def colorMap(BM, stateFPs):
 
         countystate = "%s, %s" % (countyname, statename)
         try:
-            ccolor = 'b'#county_colors[countystate]
+            ccolor = countyFpToLeDict[county["GEOID"]][1]
+            # colAlpha = 1#float(countyFpToLeDict[county["GEOID"]][1])
+            # colAlpha = 0
         except KeyError:
+            print("No match for", countystate)
+            continue
             # No exact match; try for a fuzzy match
-            fuzzyname = fuzzy_find(countystate, county_colors.keys())
-            if fuzzyname:
-                ccolor = county_colors[fuzzyname]
-                county_colors[countystate] = ccolor
-            else:
-                print("No match for", countystate)
-                continue
+            # colAlpha = 0
+            # fuzzyname = fuzzy_find(countystate, county_colors.keys())
+            # if fuzzyname:
+            #     ccolor = county_colors[fuzzyname]
+            #     county_colors[countystate] = ccolor
+            # else:
+            #     print("No match for", countystate)
+            #     continue
 
 
 
