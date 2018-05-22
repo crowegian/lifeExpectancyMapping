@@ -195,10 +195,11 @@ def addLegend(colorSpec, bins):
     norm = mpl.colors.BoundaryNorm(bins, cmap.N)
     cb = mpl.colorbar.ColorbarBase(ax, cmap=cmap,
                                     norm=norm,
-                                    ticks=bins,
+                                    ticks=bins[list(range(0, len(bins), 2))],
                                     spacing='uniform',
                                     orientation='horizontal')
-    cb.ax.set_xlabel('Life Expectancy at Birth in Years')
+    cb.ax.tick_params(labelsize=18)
+    cb.ax.set_xlabel('Life Expectancy at Birth in Years', fontsize = 24)
 
 
 
@@ -212,7 +213,7 @@ def showMap(colorSpec, bins, savePath = None):
     TODO:
     """
 #     showMap()
-    plt.title('County Level Life Expectancy at Birth', fontsize = 48)
+    plt.title('County Level Life Expectancy at Birth', fontsize = 36)
     addLegend(colorSpec = colorSpec, bins = bins)
     if savePath is not None:
         fig = plt.gcf()
