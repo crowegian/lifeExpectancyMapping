@@ -6,5 +6,5 @@ Life expectancy data can be found [here](http://ghdx.healthdata.org/record/unite
 Census data can be found on the [US Census site](https://www.census.gov/data/datasets/2016/demo/popest/counties-detail.html)
 
 So far the map looks like this:
-![alt text](plots/LECountyMap.png "Logo Title Text 1")
+![alt text](plots/LECountyMap.png "Life Expectancy Plot")
 
