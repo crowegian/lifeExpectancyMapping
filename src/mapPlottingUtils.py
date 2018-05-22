@@ -202,16 +202,21 @@ def addLegend(colorSpec, bins):
 
 
 
-def showMap(colorSpec, bins):
+def showMap(colorSpec, bins, savePath = None):
     """
     Description: Real simply. Shows the mape and chamges some title stuff.
     Input:
+        colorSpec (list(colors)): A list of colors for each bin in the LE histogram
+        bins (list(ints)): A list of LE floats which represents the bins for the histogram
     Output:
     TODO:
     """
 #     showMap()
     plt.title('County Level Life Expectancy at Birth', fontsize = 48)
     addLegend(colorSpec = colorSpec, bins = bins)
+    if savePath is not None:
+        fig = plt.gcf()
+        fig.savefig(savePath)
     # Get rid of some of the extraneous whitespace matplotlib loves to use.
     # plt.tight_layout(pad=0, w_pad=0, h_pad=0)
     plt.show()
