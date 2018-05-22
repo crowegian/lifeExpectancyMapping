@@ -29,7 +29,7 @@ def findCountyLE(lifeExpDF, leYear = "Life expectancy, 2014*"):
 
 
     nBuckets = 11
-    colorSpec = sns.diverging_palette(240, 10, n = (nBuckets + 1))
+    colorSpec = sns.diverging_palette(10, 240, n = (nBuckets + 1))
     _, bins = np.histogram(LEs, nBuckets)
     binAssignments = np.digitize(LEs, bins)
 
@@ -51,4 +51,4 @@ def findCountyLE(lifeExpDF, leYear = "Life expectancy, 2014*"):
         curColor = colorSpec[(binAssignment-1)]
         countyFpToLeDict[fip] = (row[1]["Location"], curColor)
         LEs.append(lifeExp)
-    return(countyFpToLeDict, LEs)
+    return(countyFpToLeDict, LEs, bins, colorSpec)

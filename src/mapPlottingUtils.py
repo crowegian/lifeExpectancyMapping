@@ -1,6 +1,8 @@
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib as mpl
+
 # from src.countyDataExtractionUtils import findCountyLE
 
 # Code heavily copied and influenced by
@@ -88,7 +90,7 @@ def draw_us_map():
                                'counties',
                                drawbounds=True)
     stateFPs = getStateFPs(BM)
-    return(BM, stateFPs)
+    return(BM, stateFPs, fig)
 
 
 
@@ -171,7 +173,36 @@ def colorMap(BM, stateFPs, countyFpToLeDict):
         # countyseg = BM.counties[i]
         poly = plt.Polygon(countyseg, facecolor = ccolor)  # edgecolor="white"
         ax.add_patch(poly)
-def showMap():
+
+
+
+
+
+def addLegend(colorSpec, bins):
+    """
+    Description: Adds a colorbar as a legend to understand the county LE map/
+    Input:
+        colorSpec (list(colors)): A list of colors for each bin in the LE histogram
+        bins (list(ints)): A list of LE floats which represents the bins for the histogram
+    Output:
+        None
+    TODO:
+    """
+    fig = plt.gcf()
+    ax = fig.add_axes([0.27, 0.1, 0.5, 0.05])
+    cmap = mpl.colors.ListedColormap(colorSpec)
+
+    norm = mpl.colors.BoundaryNorm(bins, cmap.N)
+    cb = mpl.colorbar.ColorbarBase(ax, cmap=cmap,
+                                    norm=norm,
+                                    ticks=bins,
+                                    spacing='uniform',
+                                    orientation='horizontal')
+    cb.ax.set_xlabel('Life Expectancy at Birth in Years')
+
+
+
+def showMap(colorSpec, bins):
     """
     Description: Real simply. Shows the mape and chamges some title stuff.
     Input:
@@ -179,7 +210,9 @@ def showMap():
     TODO:
     """
 #     showMap()
-    plt.title('US Counties', fontsize = 48)
+    plt.title('County Level Life Expectancy at Birth', fontsize = 48)
+    addLegend(colorSpec = colorSpec, bins = bins)
     # Get rid of some of the extraneous whitespace matplotlib loves to use.
-    plt.tight_layout(pad=0, w_pad=0, h_pad=0)
+    # plt.tight_layout(pad=0, w_pad=0, h_pad=0)
     plt.show()
+    # plt.colorbar()
