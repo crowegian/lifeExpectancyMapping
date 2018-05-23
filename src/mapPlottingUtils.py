@@ -119,7 +119,7 @@ def colorMap(BM, stateFPs, countyFpToLeDict):
         try:
             statename = stateFPs[int(county["STATEFP"])]
         except IndexError:
-            print(countyname, "has out-of-index statefp of", county["STATEFP"])
+            # print(countyname, "has out-of-index statefp of", county["STATEFP"])
             continue
 
 

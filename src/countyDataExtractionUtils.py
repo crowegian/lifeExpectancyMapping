@@ -4,7 +4,7 @@ import seaborn as sns; sns.set()
 
 
 
-def findCountyLE(lifeExpDF, colOfInterest, colorStart, colorEnd):
+def findCountyLE(lifeExpDF, colOfInterest, colorPaletteFunction, paletteColor):
     """
     Description: Finds all LEs for counties in the dataset and then assigns LEs to a color
         on a diverging color scale. 
@@ -17,6 +17,10 @@ def findCountyLE(lifeExpDF, colOfInterest, colorStart, colorEnd):
     TODO:
         1) Generalize a bit by adding in arguments for colos and number of buckets.
     """
+    # assertString = "Not the right combination of not None arguments for coloring map"
+    # assert (((colorStart is not None and colorEnd is not None) == True) or
+    #     ((colorPaletteFunction is not None and paletteColor is not None) == True)), assertString
+
     LEs = []
     # countyFpToLeDict = {}
     for row in lifeExpDF.iterrows():
@@ -29,7 +33,7 @@ def findCountyLE(lifeExpDF, colOfInterest, colorStart, colorEnd):
 
 
     nBuckets = 11
-    colorSpec = sns.diverging_palette(colorStart, colorEnd, n = (nBuckets + 1))
+    colorSpec = colorPaletteFunction(paletteColor, n_colors = (nBuckets + 1))#sns.diverging_palette(colorStart, colorEnd, n = (nBuckets + 1))
     _, bins = np.histogram(LEs, nBuckets)
     binAssignments = np.digitize(LEs, bins)
 
