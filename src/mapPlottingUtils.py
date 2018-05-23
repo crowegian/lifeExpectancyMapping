@@ -178,7 +178,7 @@ def colorMap(BM, stateFPs, countyFpToLeDict):
 
 
 
-def addLegend(colorSpec, bins):
+def addLegend(colorSpec, bins, title):
     """
     Description: Adds a colorbar as a legend to understand the county LE map/
     Input:
@@ -199,11 +199,11 @@ def addLegend(colorSpec, bins):
                                     spacing='uniform',
                                     orientation='horizontal')
     cb.ax.tick_params(labelsize=18)
-    cb.ax.set_xlabel('Life Expectancy at Birth in Years', fontsize = 24)
+    cb.ax.set_xlabel(title, fontsize = 24)
 
 
 
-def showMap(colorSpec, bins, savePath = None):
+def showMap(colorSpec, bins, plotOptions):
     """
     Description: Real simply. Shows the mape and chamges some title stuff.
     Input:
@@ -213,11 +213,11 @@ def showMap(colorSpec, bins, savePath = None):
     TODO:
     """
 #     showMap()
-    plt.title('County Level Life Expectancy at Birth', fontsize = 36)
-    addLegend(colorSpec = colorSpec, bins = bins)
-    if savePath is not None:
+    plt.title(plotOptions["title"], fontsize = 36)
+    addLegend(colorSpec = colorSpec, bins = bins, title = plotOptions["colorBarTitle"])
+    if "savePath" in plotOptions and plotOptions["savePath"] is not None:
         fig = plt.gcf()
-        fig.savefig(savePath)
+        fig.savefig(plotOptions["savePath"])
     # Get rid of some of the extraneous whitespace matplotlib loves to use.
     # plt.tight_layout(pad=0, w_pad=0, h_pad=0)
     plt.show()

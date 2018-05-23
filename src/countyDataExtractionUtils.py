@@ -4,7 +4,7 @@ import seaborn as sns; sns.set()
 
 
 
-def findCountyLE(lifeExpDF, leYear = "Life expectancy, 2014*"):
+def findCountyLE(lifeExpDF, colOfInterest, colorStart, colorEnd):
     """
     Description: Finds all LEs for counties in the dataset and then assigns LEs to a color
         on a diverging color scale. 
@@ -20,16 +20,16 @@ def findCountyLE(lifeExpDF, leYear = "Life expectancy, 2014*"):
     LEs = []
     # countyFpToLeDict = {}
     for row in lifeExpDF.iterrows():
-    #     print(row)
-        lifeExp = row[1][leYear]
-        lifeExp = float(lifeExp.split()[0])
+        # print(row)
+        lifeExp = row[1][colOfInterest]
+        lifeExp = lifeExp
         lifeExp = lifeExp
         LEs.append(lifeExp)
 
 
 
     nBuckets = 11
-    colorSpec = sns.diverging_palette(10, 240, n = (nBuckets + 1))
+    colorSpec = sns.diverging_palette(colorStart, colorEnd, n = (nBuckets + 1))
     _, bins = np.histogram(LEs, nBuckets)
     binAssignments = np.digitize(LEs, bins)
 
@@ -38,15 +38,15 @@ def findCountyLE(lifeExpDF, leYear = "Life expectancy, 2014*"):
     countyFpToLeDict = {}
   
     for binAssignment, row in zip(binAssignments, lifeExpDF.iterrows()):
-    #     print(row)
+        # print(row)
         fip = str(row[1]["FIPS"]).zfill(5)
         if fip in countyFpToLeDict:
             print(countyFpToLeDict)
             print("*"*100)
             print(row)
             print("\n")
-        lifeExp = row[1][leYear]
-        lifeExp = float(lifeExp.split()[0])
+        lifeExp = row[1][colOfInterest]
+        lifeExp = lifeExp
         lifeExp = lifeExp
         curColor = colorSpec[(binAssignment-1)]
         countyFpToLeDict[fip] = (row[1]["Location"], curColor)
