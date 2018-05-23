@@ -9,4 +9,4 @@ So far the LE map looks like this:
 ![alt text](plots/LECountyMap.png "Life Expectancy Plot")
 
 So far the Native American Population map looks like this:
-![alt text](plots/NativePopulationMap.png "Life Expectancy Plot")
+![alt text](plots/NativePopulationMap.png "Native American Population")
